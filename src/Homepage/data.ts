@@ -35,7 +35,8 @@ export type PropertyCardData = {
 
 export const homepageNavItems: NavItem[] = [
   { label: "Explore", href: "/home" },
-  { label: "Verified Homes", href: "/home#verified-homes" },
+  { label: "Concierge", href: "/concierge" },
+  { label: "Saved", href: "/saved" },
   { label: "Become a Host", href: "/#host" },
 ];
 

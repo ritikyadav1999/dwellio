@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Menu, UserCircle } from "lucide-react";
 import { motion } from "framer-motion";
 
@@ -19,15 +20,16 @@ import { homepageNavItems, type NavItem } from "./data";
 
 type NavbarProps = {
   items?: NavItem[];
-  activeLabel?: string;
   className?: string;
 };
 
 export function Navbar({
   items = homepageNavItems,
-  activeLabel = "Explore",
   className,
 }: NavbarProps) {
+  const pathname = usePathname();
+  const activeHref = getActiveHref(pathname, items);
+
   return (
     <motion.header
       initial={{ opacity: 0, y: -10 }}
@@ -57,7 +59,7 @@ export function Navbar({
 
         <nav aria-label="Primary navigation" className="hidden items-center gap-10 md:flex">
           {items.map((item) => (
-            <NavLink key={item.label} item={item} active={item.label === activeLabel} />
+            <NavLink key={item.label} item={item} active={normalizeHref(item.href) === activeHref} />
           ))}
         </nav>
 
@@ -75,7 +77,7 @@ export function Navbar({
           <Button asChild className="h-10 rounded-md px-6 shadow-sm">
             <Link href="/sign-in">Continue</Link>
           </Button>
-          <MobileNav items={items} activeLabel={activeLabel} />
+          <MobileNav items={items} activeHref={activeHref} />
         </div>
       </div>
     </motion.header>
@@ -104,7 +106,7 @@ function NavLink({ item, active }: { item: NavItem; active: boolean }) {
   );
 }
 
-function MobileNav({ items, activeLabel }: { items: NavItem[]; activeLabel: string }) {
+function MobileNav({ items, activeHref }: { items: NavItem[]; activeHref: string | null }) {
   return (
     <Sheet>
       <SheetTrigger asChild>
@@ -129,7 +131,7 @@ function MobileNav({ items, activeLabel }: { items: NavItem[]; activeLabel: stri
                 href={item.href}
                 className={cn(
                   "dwellio-label border-b border-outline-variant/30 py-5 text-on-surface-variant transition-colors hover:text-primary",
-                  item.label === activeLabel && "text-primary"
+                  normalizeHref(item.href) === activeHref && "text-primary"
                 )}
               >
                 {item.label}
@@ -147,4 +149,33 @@ function MobileNav({ items, activeLabel }: { items: NavItem[]; activeLabel: stri
       </SheetContent>
     </Sheet>
   );
+}
+
+function normalizeHref(href: string) {
+  return href.split("#")[0] || "/";
+}
+
+function isNavItemActive(pathname: string, href: string) {
+  const baseHref = normalizeHref(href);
+
+  if (baseHref === "/") {
+    return pathname === "/";
+  }
+
+  return pathname === baseHref || pathname.startsWith(`${baseHref}/`);
+}
+
+function getActiveHref(pathname: string, items: NavItem[]) {
+  const matchingItem = items.find((item) => isNavItemActive(pathname, item.href));
+  if (matchingItem) {
+    return normalizeHref(matchingItem.href);
+  }
+
+  // Keep nav underline motion continuous for internal journey pages.
+  if (pathname.startsWith("/properties") || pathname.startsWith("/schedule")) {
+    const exploreItem = items.find((item) => normalizeHref(item.href) === "/home");
+    return exploreItem ? normalizeHref(exploreItem.href) : null;
+  }
+
+  return null;
 }

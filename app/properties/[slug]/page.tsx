@@ -1,8 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { BadgeCheck, CalendarDays, KeyRound, MessageCircle, Sparkles } from "lucide-react";
+import { BadgeCheck, CalendarDays, KeyRound, Sparkles } from "lucide-react";
 
+import { SpeakWithConciergeModal } from "@/components/concierge/SpeakWithConciergeModal";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -154,10 +155,14 @@ export default async function PropertyDetailPage({ params }: PropertyDetailPageP
                   Schedule a Visit
                   </Link>
                 </Button>
-                <Button variant="outline" className="h-12 rounded-md">
-                  <MessageCircle className="size-4" aria-hidden="true" />
-                  Speak with an Advisor
-                </Button>
+                <SpeakWithConciergeModal
+                  source="property-detail"
+                  trigger={
+                    <Button variant="outline" className="h-12 rounded-md">
+                      Speak with a Concierge
+                    </Button>
+                  }
+                />
               </div>
 
               <div className="mt-7 border-t border-outline-variant/25 pt-6">
