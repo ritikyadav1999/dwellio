@@ -1,10 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
 import {
+  ArrowRight,
   BadgeCheck,
+  Building2,
   FileCheck2,
   Landmark,
   ShieldCheck,
+  Users,
   WalletCards,
 } from "lucide-react";
 
@@ -136,32 +139,71 @@ function CuratedCollections() {
 }
 
 function HostContactSection() {
+  const hostBenefits = [
+    { label: "Verified Tenants", icon: ShieldCheck },
+    { label: "Calm Operations", icon: Building2 },
+    { label: "Hospitality Onboarding", icon: Users },
+  ];
+
   return (
-    <section id="host" className="bg-surface py-24 sm:py-32">
+    <section id="host" className="border-t border-outline-variant/20 bg-surface-container-low py-24 sm:py-32">
       <div className="dwellio-container">
-        <Card className="rounded-xl border border-outline-variant/25 bg-primary py-0 text-primary-foreground shadow-none">
-          <CardContent className="grid gap-10 p-8 sm:p-12 lg:grid-cols-[1fr_0.75fr] lg:items-end">
-            <div>
-              <p className="dwellio-label mb-5 text-primary-foreground/65">Become a host</p>
-              <h2 className="max-w-3xl font-heading text-4xl font-normal leading-tight sm:text-6xl">
-                Open your residence to a more considered rental experience.
-              </h2>
+        <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
+          {/* Content side */}
+          <div>
+            <p className="dwellio-label mb-5 text-on-surface-variant">Become a host</p>
+            <h2 className="max-w-xl font-heading text-4xl font-normal leading-tight text-primary sm:text-5xl">
+              Open your residence to a more considered rental experience.
+            </h2>
+            <p className="mt-6 max-w-lg text-lg leading-relaxed text-on-surface-variant">
+              Partner with Dwellio for verified tenants, calmer operations, and a hospitality-led
+              onboarding path.
+            </p>
+
+            {/* Benefits */}
+            <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:gap-8">
+              {hostBenefits.map((benefit) => {
+                const Icon = benefit.icon;
+                return (
+                  <div key={benefit.label} className="flex items-center gap-3">
+                    <span className="flex size-10 items-center justify-center rounded-full bg-surface-container text-primary">
+                      <Icon className="size-5" aria-hidden="true" />
+                    </span>
+                    <span className="dwellio-label text-primary">{benefit.label}</span>
+                  </div>
+                );
+              })}
             </div>
-            <div id="contact" className="lg:justify-self-end">
-              <p className="text-base leading-relaxed text-primary-foreground/75">
-                Partner with Dwellio for verified tenants, calmer operations, and a hospitality-led
-                onboarding path.
-              </p>
+
+            <div className="mt-10">
               <Button
                 asChild
-                variant="secondary"
-                className="mt-8 h-11 rounded-md bg-primary-foreground px-7 text-primary hover:bg-primary-foreground/85"
+                size="lg"
+                variant="outline"
+                className="h-12 rounded-full border-primary/30 px-8 hover:border-primary hover:bg-primary hover:text-primary-foreground"
               >
-                <Link href="mailto:hello@dwellio.com">Contact Us</Link>
+                <Link href="mailto:hello@dwellio.com">
+                  Contact Us
+                  <ArrowRight className="ml-2 size-4" aria-hidden="true" />
+                </Link>
               </Button>
             </div>
-          </CardContent>
-        </Card>
+          </div>
+
+          {/* Image side */}
+          <div className="relative">
+            <div className="relative aspect-[5/4] overflow-hidden rounded-xl bg-surface-container">
+              <Image
+                src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&q=80"
+                alt="Premium residence managed by Dwellio"
+                fill
+                sizes="(min-width: 1024px) 45vw, 100vw"
+                className="object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-primary/10 to-transparent" />
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );
