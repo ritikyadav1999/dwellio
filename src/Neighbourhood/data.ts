@@ -25,6 +25,13 @@ export type NeighbourhoodData = {
     image: string;
     imageAlt: string;
   }>;
+  venues: Array<{
+    name: string;
+    category: "cafe" | "coworking" | "park" | "dining" | "nightlife" | "fitness";
+    description: string;
+    image: string;
+    imageAlt: string;
+  }>;
 };
 
 export const neighbourhoodData: NeighbourhoodData[] = [
@@ -102,6 +109,50 @@ export const neighbourhoodData: NeighbourhoodData[] = [
           "https://lh3.googleusercontent.com/aida-public/AB6AXuDfZZFDVbdTfYhQDcKCh0-UQj45CR6yLjiLTIszP85DX-PUNV1i-kpfL5Y6n6M8FHz5SbuBhQF8nYWXnzqiV3kAMZ1LKIGUjPMc2dVRI13XCVBCQ6OuPPvRNtJlb10qZDeQ-Te9nAmplhOhMySnd-cYt1a4KE3557lHTBVwpOWMxlix_mp7fPYfImy8jJZ2bgw-cYz6oK0w76npTou3Ej52EcuCmPXquaQifUgDwg8A63UyOTSCrKXtMs-a_7_LBCPoY247p0tR5zs",
         imageAlt:
           "Expansive coworking space with high ceilings and minimalist desks.",
+      },
+    ],
+    venues: [
+      {
+        name: "Matteo Coffea",
+        category: "cafe",
+        description: "Artisanal coffee in a rustic, plant-filled space.",
+        image: "https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=600&q=80",
+        imageAlt: "Rustic cafe interior with plants.",
+      },
+      {
+        name: "HSR Urban Forest",
+        category: "park",
+        description: "A green lung in the middle of the sector grid.",
+        image: "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=600&q=80",
+        imageAlt: "Lush urban park with walking paths.",
+      },
+      {
+        name: "Byg Brewski Brewing",
+        category: "dining",
+        description: "Craft beer and wood-fired pizzas in a massive open-air setup.",
+        image: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=600&q=80",
+        imageAlt: "Open-air brewery dining space.",
+      },
+      {
+        name: "WeWork HSR",
+        category: "coworking",
+        description: "Premium coworking with skyline views and networking events.",
+        image: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=600&q=80",
+        imageAlt: "Modern coworking space with natural light.",
+      },
+      {
+        name: "Cult.fit HSR",
+        category: "fitness",
+        description: "High-energy group workouts and functional training.",
+        image: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=600&q=80",
+        imageAlt: "Fitness studio with workout equipment.",
+      },
+      {
+        name: "Cafe Felix",
+        category: "cafe",
+        description: "A cozy spot known for its all-day breakfast and specialty brews.",
+        image: "https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=600&q=80",
+        imageAlt: "Cozy cafe with all-day breakfast.",
       },
     ],
   },
@@ -187,6 +238,64 @@ export const neighbourhoodData: NeighbourhoodData[] = [
           "https://lh3.googleusercontent.com/aida-public/AB6AXuD9nO94kl38FMUKEJaX-Q4VwsmPfsV1dWopEByhnI0Zl3Tgq5qYX_M-o_TmTg0RMaHlTIl0QRhF4SHp5lC1oD6jagMunzfAjV0y1YDL8y9uP6BgwOvriWco9tm3m80wknzwu2ET_Gch3UpSMQyhTaM6sDeVxIpZiPzVt4tP7Rc428BBPFLbTCt-ci6rwXf27gslUoeMIdeplpfk2F9EpRde2aEPMsR2Pe_ZF2EcBKGHVL82NG5HdO6zt3ytQr365LVRnrSSBSKgeU0",
         imageAlt:
           "Sophisticated rooftop bar with ambient lighting and city views.",
+      },
+    ],
+    venues: [
+      {
+        name: "Third Wave Coffee Roasters",
+        category: "cafe",
+        description: "Specialty coffee brewed with precision in a minimalist space.",
+        image: "https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=600&q=80",
+        imageAlt: "Minimalist coffee roastery interior.",
+      },
+      {
+        name: "Toit",
+        category: "dining",
+        description: "Bangalore's iconic microbrewery with a lively beer garden.",
+        image: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=600&q=80",
+        imageAlt: "Lively microbrewery beer garden.",
+      },
+      {
+        name: "Loft 38",
+        category: "nightlife",
+        description: "Rooftop bar with panoramic views and creative cocktails.",
+        image: "https://images.unsplash.com/photo-1470337458703-46ad1756a187?w=600&q=80",
+        imageAlt: "Rooftop bar with city skyline view.",
+      },
+      {
+        name: "Smoke House Deli",
+        category: "dining",
+        description: "Chic European-style deli known for its pastas and desserts.",
+        image: "https://images.unsplash.com/photo-1550966871-3ed3cdb51f3a?w=600&q=80",
+        imageAlt: "Chic European-style deli interior.",
+      },
+      {
+        name: "WeWork Galaxy",
+        category: "coworking",
+        description: "A bustling coworking hub in the heart of Koramangala.",
+        image: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=600&q=80",
+        imageAlt: "Busy coworking space with modern furniture.",
+      },
+      {
+        name: "Starbucks Reserve",
+        category: "cafe",
+        description: "Premium coffee experience with rare single-origin brews.",
+        image: "https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=600&q=80",
+        imageAlt: "Premium coffee bar with rustic decor.",
+      },
+      {
+        name: "Koramangala Park",
+        category: "park",
+        description: "A well-maintained community park popular with joggers.",
+        image: "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=600&q=80",
+        imageAlt: "Green community park with walking paths.",
+      },
+      {
+        name: "Arena 29",
+        category: "nightlife",
+        description: "Underground club hosting live indie music and DJ nights.",
+        image: "https://images.unsplash.com/photo-1571266028243-e4733b0f0bb0?w=600&q=80",
+        imageAlt: "Underground music club with live performance.",
       },
     ],
   },
@@ -276,6 +385,57 @@ export const neighbourhoodData: NeighbourhoodData[] = [
           "https://lh3.googleusercontent.com/aida-public/AB6AXuBe-0CRLz5ajDJiL4R553o8kp1GsX9HlIvySjSkDYtMn0k2rvc3iK3jJiqHjpRWX53hg1JIjssftll5thRqCBBZHHYByA7hX_iFdjTvKsBwiu-RdhaaxxFRhJj6vFwjf4zKKdgTr_hmZqxBCsTBDzFoWNMwLnUTYqghG_LCGirl_gfmulvCBJTTNnU0NA890MNYNbKbDKq7FMF_94HQuP1a7WpmWHk8ZE6r93uDoEM_-fTtBP8sJi9ge0SSzOzAGibFCy9SUk-qTPM",
         imageAlt:
           "Elegant fine dining restaurant with warm lighting and refined table settings.",
+      },
+    ],
+    venues: [
+      {
+        name: "Arbor Brewing Company",
+        category: "nightlife",
+        description: "American microbrewery with a sprawling outdoor patio.",
+        image: "https://images.unsplash.com/photo-1470337458703-46ad1756a187?w=600&q=80",
+        imageAlt: "Microbrewery outdoor patio with string lights.",
+      },
+      {
+        name: "Smoke House Deli",
+        category: "dining",
+        description: "Upscale European dining in a restored bungalow setting.",
+        image: "https://images.unsplash.com/photo-1550966871-3ed3cdb51f3a?w=600&q=80",
+        imageAlt: "Upscale dining room in a restored bungalow.",
+      },
+      {
+        name: "12th Main Park",
+        category: "park",
+        description: "A leafy neighbourhood park perfect for evening strolls.",
+        image: "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=600&q=80",
+        imageAlt: "Leafy neighbourhood park with walking paths.",
+      },
+      {
+        name: "Matteo Coffea",
+        category: "cafe",
+        description: "Quiet corner for remote work with excellent pour-over coffee.",
+        image: "https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=600&q=80",
+        imageAlt: "Quiet cafe with pour-over coffee setup.",
+      },
+      {
+        name: "The Yoga Barn",
+        category: "fitness",
+        description: "Holistic yoga and meditation studio set in a calm space.",
+        image: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=600&q=80",
+        imageAlt: "Yoga studio with natural light and wooden floors.",
+      },
+      {
+        name: "Burma Burma",
+        category: "dining",
+        description: "Pure vegetarian Burmese cuisine in an elegant tea-house setting.",
+        image: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=600&q=80",
+        imageAlt: "Elegant tea-house restaurant interior.",
+      },
+      {
+        name: "Starbucks 100ft Road",
+        category: "cafe",
+        description: "Convenient coffee stop on the main Indiranagar drag.",
+        image: "https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=600&q=80",
+        imageAlt: "Coffee shop interior with warm lighting.",
       },
     ],
   },

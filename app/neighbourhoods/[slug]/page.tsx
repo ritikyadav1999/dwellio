@@ -1,13 +1,17 @@
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import type { Metadata } from "next";
 import {
   Banknote,
   Check,
+  Coffee,
   Footprints,
   Home,
   Laptop,
+  Leaf,
   Minus,
+  Music,
   Plus,
   TrainFront,
   Users,
@@ -33,6 +37,21 @@ export function generateStaticParams() {
   return neighbourhoodData.map((neighbourhood) => ({
     slug: neighbourhood.slug,
   }));
+}
+
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params;
+  const neighbourhood = neighbourhoodData.find((n) => n.slug === slug);
+  if (!neighbourhood) return {};
+  return {
+    title: `Living in ${neighbourhood.name}, Bangalore - Dwellio`,
+    description: neighbourhood.description,
+    openGraph: {
+      title: `Living in ${neighbourhood.name}, Bangalore - Dwellio`,
+      description: neighbourhood.description,
+      images: [{ url: neighbourhood.image }],
+    },
+  };
 }
 
 export default async function NeighbourhoodDetailPage({ params }: PageProps) {
@@ -245,32 +264,47 @@ export default async function NeighbourhoodDetailPage({ params }: PageProps) {
         </div>
       </section>
 
-      {/* Lifestyle Highlights */}
+      {/* Places to Go */}
       <section className="dwellio-container pb-[120px]">
         <h2 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-normal leading-[1.2] tracking-[-0.01em] text-primary mb-10 sm:mb-12 text-center">
-          Lifestyle Highlights
+          Places to Go
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
-          {neighbourhood.highlights.map((highlight) => (
-            <div key={highlight.title} className="group cursor-pointer">
-              <div className="relative w-full aspect-[4/5] rounded-lg overflow-hidden mb-6">
-                <Image
-                  src={highlight.image}
-                  alt={highlight.imageAlt}
-                  fill
-                  sizes="(min-width: 768px) 30vw, 100vw"
-                  className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-primary/10 group-hover:bg-transparent transition-colors duration-500" />
+          {neighbourhood.venues.map((venue) => {
+            const CATEGORY_LABELS: Record<string, string> = {
+              cafe: "Cafe",
+              coworking: "Coworking",
+              park: "Park",
+              dining: "Dining",
+              nightlife: "Nightlife",
+              fitness: "Fitness",
+            };
+            return (
+              <div key={venue.name} className="group cursor-pointer">
+                <div className="relative w-full aspect-[4/5] rounded-lg overflow-hidden mb-4">
+                  <Image
+                    src={venue.image}
+                    alt={venue.imageAlt}
+                    fill
+                    sizes="(min-width: 768px) 30vw, 100vw"
+                    className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-primary/10 group-hover:bg-transparent transition-colors duration-500" />
+                </div>
+                <div className="flex items-center gap-2 mb-2">
+                  <span className="dwellio-label inline-flex items-center rounded-full border border-outline-variant/25 bg-surface-container px-3 py-1 text-xs text-on-surface-variant">
+                    {CATEGORY_LABELS[venue.category] || venue.category}
+                  </span>
+                </div>
+                <h3 className="font-heading text-xl font-medium text-primary mb-2">
+                  {venue.name}
+                </h3>
+                <p className="font-sans text-sm leading-relaxed text-on-surface-variant">
+                  {venue.description}
+                </p>
               </div>
-              <h3 className="font-heading text-xl font-medium text-primary mb-2">
-                {highlight.title}
-              </h3>
-              <p className="font-sans text-sm leading-relaxed text-on-surface-variant">
-                {highlight.description}
-              </p>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </section>
 
