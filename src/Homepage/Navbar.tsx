@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu, UserCircle } from "lucide-react";
@@ -30,7 +30,6 @@ export function Navbar({
 }: NavbarProps) {
   const pathname = usePathname();
   const activeHref = getActiveHref(pathname, items);
-  const [mobileOpen, setMobileOpen] = useState(false);
 
   // ── Scroll-aware hide/show ──────────────────────────────────────────
   const { scrollY } = useScroll();
@@ -49,11 +48,6 @@ export function Navbar({
     }
     lastScrollRef.current = latest;
   });
-
-  // Close mobile nav on route change
-  useEffect(() => {
-    setMobileOpen(false);
-  }, [pathname]);
 
   return (
     <motion.header
@@ -137,10 +131,9 @@ export function Navbar({
             <Link href="/sign-in">Continue</Link>
           </Button>
           <MobileNav
+            key={pathname}
             items={items}
             activeHref={activeHref}
-            open={mobileOpen}
-            onOpenChange={setMobileOpen}
           />
         </div>
       </div>
@@ -179,16 +172,13 @@ function NavLink({ item, active }: { item: NavItem; active: boolean }) {
 function MobileNav({
   items,
   activeHref,
-  open,
-  onOpenChange,
 }: {
   items: NavItem[];
   activeHref: string | null;
-  open: boolean;
-  onOpenChange: (open: boolean) => void;
 }) {
+  const [internalOpen, setInternalOpen] = useState(false);
   return (
-    <Sheet open={open} onOpenChange={onOpenChange}>
+    <Sheet open={internalOpen} onOpenChange={setInternalOpen}>
       <SheetTrigger asChild>
         <Button variant="ghost" size="icon-sm" className="rounded-md md:hidden">
           <Menu />

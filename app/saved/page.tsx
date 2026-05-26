@@ -35,7 +35,7 @@ export default function SavedPage() {
         </div>
       </section>
 
-      <section className="sticky top-20 z-40 border-y border-outline-variant/35 bg-surface/95 backdrop-blur-sm">
+      <section className="border-y border-outline-variant/20">
         <div className="dwellio-container">
           <nav className="flex h-16 items-center gap-8 overflow-x-auto" aria-label="Saved page navigation">
             {[
